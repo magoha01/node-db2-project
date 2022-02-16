@@ -1,12 +1,12 @@
 const Cars = require("./cars-model");
 const router = require("express").Router();
 
-const {
-  checkCarId,
-  checkCarPayload,
-  checkVinNumberId,
-  checkVinNumberUnique,
-} = require("./cars-middleware");
+// const {
+//   checkCarId,
+//   checkCarPayload,
+//   checkVinNumberId,
+//   checkVinNumberUnique,
+// } = require("./cars-middleware");
 
 router.get("/", (req, res, next) => {
   Cars.getAll().then((cars) => {
@@ -14,22 +14,24 @@ router.get("/", (req, res, next) => {
   });
 });
 
-router.get("/", checkCarId, (req, res, next) => {
-  res.json(req.cars);
-});
+// router.get("/", checkCarId, (req, res, next) => {
+//   console.log("cars by id");
+//   //res.json(req.cars);
+// });
 
-router.post(
-  "/",
-  checkCarPayload,
-  checkVinNumberId,
-  checkVinNumberUnique,
-  (req, res, next) => {
-   Cars.insert(req.body)
-   .then((newCar) => {
-       res.status(201).json(newCar)
-   })
-   .catch(next)
-  }
-);
+// router.post(
+//   "/",
+//   checkCarPayload,
+//   checkVinNumberId,
+//   checkVinNumberUnique,
+//   (req, res, next) => {
+//     //  Cars.insert(req.body)
+//     //  .then((newCar) => {
+//     //      res.status(201).json(newCar)
+//     //  })
+//     //  .catch(next)
+//     //
+//   }
+// );
 
 module.exports = router;
