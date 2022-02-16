@@ -5,7 +5,7 @@ const router = express.Router();
 const {
   checkCarId,
   checkCarPayload,
-  checkVinNumberId,
+  checkVinNumberValid,
   checkVinNumberUnique,
 } = require("./cars-middleware");
 
@@ -19,15 +19,21 @@ router.get("/:id", checkCarId, (req, res, next) => {
   res.json(req.car);
 });
 
-router.post("/", async (req, res, next) => {
-  
-});
-
-// router.use((err, req, res, next) => {
-//   res.status(err.status || 500).json({
-//     customMessage: "ERROR",
-//     message: err.message,
-//   });
-// });
+router.post(
+  "/",
+  checkCarPayload,
+  checkVinNumberValid,
+  checkVinNumberUnique,
+  (req, res, next) => {
+    Cars.create(req.body)
+      .then((car) => {
+        res.status(201).json(car);
+      })
+      .then(() => {
+        Cars.getById(req.params.id);
+      })
+      .catch(next);
+  }
+);
 
 module.exports = router;
