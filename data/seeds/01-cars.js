@@ -11,26 +11,38 @@ exports.seed = function (knex) {
           vin: "KL5JD56Z85K139936",
           make: "Suzuki",
           model: "Forenza",
-          mileage: 1000,
-          title: "",
-          transmission: "",
+          mileage: 95000,
+          title: "salvage",
+          transmission: "manual",
         },
         {
           vin: "1FTPX14524NB00101",
           make: "Ford",
           model: "F 150",
           mileage: 1000,
-          title: " John Smith",
-          transmission: "manual",
+          title: "clean",
         },
         {
           vin: "1HGEM21991L005461",
           make: "Honda",
           model: "Civic",
-          mileage: 1000,
-          title: "Jane Doe",
+          mileage: 25000,
           transmission: "automatic",
         },
       ]);
     });
 };
+
+//can const cars = [], THEN:
+
+// exports.seed = function (knex) {
+//   return knex('cars')
+//   .truncate().then(() => {
+//     return knex('cars').insert(cars)
+//   })
+// }
+
+// exports.seed = async function (knex) {
+//   await knex('cars').truncate()
+//   await knex('cars').insert(cars)
+// }

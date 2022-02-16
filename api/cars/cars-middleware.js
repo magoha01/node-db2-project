@@ -1,20 +1,16 @@
 const Cars = require("./cars-model");
 
-const checkCarId = async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const cars = await Cars.getById(id);
-    if (!cars) {
-      res.status(404).json({
-        message: `car with id ${id} is not found`,
-      });
-    } else {
-      req.cars = cars;
-      next();
-    }
-  } catch (err) {
-    next(err);
-  }
+const checkCarId = (req, res, next) => {
+  Cars.getById(req.params.id)
+    .then((car) => {
+      if (car) {
+        req.car = car;
+        next();
+      } else {
+        res.status(404).json({ message: "Failed to retrieve car" });
+      }
+    })
+    .catch(next);
 };
 
 const checkCarPayload = (req, res, next) => {};
