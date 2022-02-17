@@ -75,14 +75,3 @@ module.exports = {
   checkVinNumberValid,
   checkVinNumberUnique,
 };
-
-// const checkVinNumberValid = (req, res, next) => {
-//   if (vin.validate(req.body.vin)) {
-//     next();
-//   } else {
-//     next({
-//       status: 400,
-//       message: `vin ${req.body.vin} is invalid`,
-//     });
-//   }
-// };
